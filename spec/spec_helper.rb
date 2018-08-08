@@ -5,7 +5,7 @@ require 'rspec'
 require 'rack/test'
 require 'webmock/rspec'
 require 'omniauth-oauth2'
-require 'omniauth-fitbit'
+require 'omniauth-withings2'
 
 RSpec.configure do |config|
   config.include WebMock::API

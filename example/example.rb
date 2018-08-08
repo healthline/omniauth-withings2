@@ -1,18 +1,20 @@
 require 'sinatra'
-require 'omniauth-fitbit'
+require 'omniauth-withings2'
+require 'pry'
 
 use Rack::Session::Cookie
 use OmniAuth::Builder do
-  provider :fitbit, '', '', { :scope => 'profile', :redirect_uri => 'http://localhost:4567/auth/fitbit/callback' }
+  provider :withings2, ENV['WITHINGS_CLIENT_ID'], ENV['WITHINGS_CONSUMER_SECRET'], { :scope => 'user.metrics', :redirect_uri => 'http://localhost:4567/auth/withings2/callback' }
 end
 
 get '/' do
   <<-HTML
-  <a href='/auth/fitbit'>Sign in with Fitbit</a>
+  <a href='/auth/withings2'>Sign in with Withings</a>
   HTML
 end
-  
-get '/auth/fitbit/callback' do
+
+get '/auth/withings2/callback' do
   # Do whatever you want with the data
-  MultiJson.encode(request.env['omniauth.auth'])
+  # MultiJson.encode(request.env['omniauth.auth'])
+  request.env['omniauth.auth'].to_json
 end
