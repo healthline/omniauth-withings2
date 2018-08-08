@@ -30,7 +30,7 @@ module OmniAuth
       end
 
       uid do
-        access_token.params['user_id']
+        access_token.params['userid']
       end
     end
   end
