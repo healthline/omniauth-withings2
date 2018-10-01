@@ -27,15 +27,15 @@ describe "OmniAuth::Strategies::Withings2" do
 
   context 'client options' do
     it 'has correct OAuth endpoint' do
-      expect(subject.options.client_options.site).to eq('https://account.health.nokia.com')
+      expect(subject.options.client_options.site).to eq('https://account.withings.com')
     end
 
     it 'has correct authorize url' do
-      expect(subject.options.client_options.authorize_url).to eq('https://account.health.nokia.com/oauth2_user/authorize2')
+      expect(subject.options.client_options.authorize_url).to eq('https://account.withings.com/oauth2_user/authorize2')
     end
 
     it 'has correct token url' do
-      expect(subject.options.client_options.token_url).to eq('https://account.health.nokia.com/oauth2/token')
+      expect(subject.options.client_options.token_url).to eq('https://account.withings.com/oauth2/token')
     end
   end
 

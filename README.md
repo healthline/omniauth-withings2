@@ -21,7 +21,7 @@ Or install it yourself as:
 
 ## Get your Oauth credentials
 
-To register your application with Nokia and obtain a client id and consumer secret, go to the [Nokia application registration](https://account.health.nokia.com/partner/add_oauth2).
+To register your application with Nokia and obtain a client id and consumer secret, go to the [Nokia application registration](https://account.withings.com/partner/add_oauth2).
 
 ## Running the example
 
@@ -82,7 +82,7 @@ api_access_token = OAuth::AccessToken.from_hash(oauth_consumer, {
 })
 
 # Change the uri to access other Nokia API endpoints
-uri = "https://api.health.nokia.com/measure?action=getmeas&userid=#{nokia_user_id}"
+uri = "https://wbsapi.withings.net/measure?action=getmeas&userid=#{nokia_user_id}"
 
 request = api_access_token.get(uri)
 JSON.parse(request.body)

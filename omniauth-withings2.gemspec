@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/platejoy/omniauth-withings2"
   s.summary     = %q{OmniAuth OAuth2 strategy for Withings}
   s.description = %q{OmniAuth OAuth2 strategy for Withings}
+  s.license     = 'MIT'
 
   s.files         = `git ls-files`.split($\)
   s.executables   = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

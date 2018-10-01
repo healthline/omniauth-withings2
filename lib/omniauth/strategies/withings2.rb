@@ -6,9 +6,9 @@ module OmniAuth
 
       option :name, 'withings2'
       option :client_options, {
-          :site          => 'https://account.health.nokia.com',
-          :authorize_url => 'https://account.health.nokia.com/oauth2_user/authorize2',
-          :token_url     => 'https://account.health.nokia.com/oauth2/token'
+          :site          => 'https://account.withings.com',
+          :authorize_url => 'https://account.withings.com/oauth2_user/authorize2',
+          :token_url     => 'https://account.withings.com/oauth2/token'
       }
 
       option :response_type, 'code'
