@@ -4,7 +4,7 @@ require 'pry'
 
 use Rack::Session::Cookie
 use OmniAuth::Builder do
-  provider :withings2, ENV['WITHINGS_CLIENT_ID'], ENV['WITHINGS_CONSUMER_SECRET'], { :scope => 'user.metrics', :redirect_uri => 'http://localhost:4567/auth/withings2/callback' }
+  provider :withings2, ENV['WITHINGS_CLIENT_ID'], ENV['WITHINGS_CLIENT_SECRET'], { :scope => 'user.metrics', :redirect_uri => 'http://localhost:4567/auth/withings2/callback' }
 end
 
 get '/' do
