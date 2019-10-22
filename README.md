@@ -1,6 +1,6 @@
 # OmniAuth Withings2 Strategy
 
-This is an OmniAuth OAuth 2.0 strategy for authenticating with the [Nokia OAuth 2.0 api](see https://developer.health.nokia.com/oauth2/#tag/OAuth-2.0).
+This is an OmniAuth OAuth 2.0 strategy for authenticating with the [Withings (formerly Nokia Health) OAuth 2.0 API](see http://developer.withings.com/oauth2/#tag/OAuth-2.0).
 
 ## Installation
 
@@ -21,13 +21,13 @@ Or install it yourself as:
 
 ## Get your Oauth credentials
 
-To register your application with Nokia and obtain a client id and consumer secret, go to the [Nokia application registration](https://account.withings.com/partner/add_oauth2).
+To register your application with Withings and obtain a client id and consumer secret, go to the [Withings developer application registration](https://account.withings.com/partner/account_login?b=add_oauth2).
 
 ## Running the example
 
 $ cd example
 $ bundle
-$ NOKIA_API_KEY=<your_nokia_api_key> NOKIA_API_SECRET=<your_nokia_api_secret> bundle exec ruby example.rb
+$ WITHINGS_CLIENT_ID=<your_withings_client_id> WITHINGS_CLIENT_SECRET=<your_withings_client_secret> bundle exec ruby example.rb
 Visit http://localhost:4567/ in a browser
 
 ## Usage
@@ -44,7 +44,7 @@ Then integrate the strategy into your middleware:
 use OmniAuth::Builder do
   provider :withings2,
     ENV['WITHINGS_CLIENT_ID'],
-    ENV['WITHINGS_CONSUMER_SECRET'],
+    ENV['WITHINGS_CLIENT_SECRET'],
     scope: 'user.metrics'
 end
 ```
@@ -55,34 +55,34 @@ In Rails, create a new file under config/initializers called omniauth.rb to plug
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :withings2,
     ENV['WITHINGS_CLIENT_ID'],
-    ENV['WITHINGS_CONSUMER_SECRET'],
+    ENV['WITHINGS_CLIENT_SECRET'],
     scope: 'user.metrics'
 end
 ```
 
-In your controller action (responding to /auth/nokia/callback), get the credentials and store them for later interaction with the API:
+In your controller action (responding to /auth/withings2/callback), get the credentials and store them for later interaction with the API:
 
 ```ruby
 request.env['omniauth.auth']['credentials']
 ```
 
 ### TODO: update
-To interact with the Nokia API (e.g. retrieve weight measurements recorded by a Nokia scale):
+To interact with the Withings API (e.g. retrieve weight measurements recorded by a Nokia/Withings scale):
 
 ```ruby
 oauth_consumer = OAuth::Consumer.new(
-  ENV['NOKIA_API_KEY'],
-  ENV['NOKIA_API_SECRET'],
-  OmniAuth::Strategies::Nokia.consumer_options,
+  ENV['WITHINGS_CLIENT_ID'],
+  ENV['WITHINGS_CLIENT_SECRET'],
+  OmniAuth::Strategies::Withings.consumer_options,
 )
 
 api_access_token = OAuth::AccessToken.from_hash(oauth_consumer, {
-  oauth_token: nokia_user_access_token,
-  oauth_token_secret: nokia_user_access_token_secret,
+  oauth_token: withings_user_access_token,
+  oauth_token_secret: withings_user_access_token_secret,
 })
 
-# Change the uri to access other Nokia API endpoints
-uri = "https://wbsapi.withings.net/measure?action=getmeas&userid=#{nokia_user_id}"
+# Change the uri to access other Withings API endpoints
+uri = "https://wbsapi.withings.net/measure?action=getmeas&userid=#{withings_user_id}"
 
 request = api_access_token.get(uri)
 JSON.parse(request.body)
@@ -99,11 +99,11 @@ For a short tutorial on how to use OmniAuth in your Rails application, visit [th
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/omniauth-nokia.
+Bug reports and pull requests are welcome on GitHub at https://github.com/platejoy/omniauth-withings2.
 
 ## Original License
 
-Copyright (c) 2016 TK Gospodinov. See [LICENSE](https://github.com/tkgospodinov/omniauth-fitbit/blob/master/LICENSE.md) for details.
+Copyright (c) 2016 TK Gospodinov. See [LICENSE](https://github.com/platejoy/omniauth-withings2/blob/master/LICENSE.md) for details.
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
