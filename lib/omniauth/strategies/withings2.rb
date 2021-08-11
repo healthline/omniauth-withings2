@@ -8,7 +8,7 @@ module OmniAuth
       option :client_options, {
           :site          => 'https://account.withings.com',
           :authorize_url => 'https://account.withings.com/oauth2_user/authorize2',
-          :token_url     => 'https://account.withings.com/oauth2/token'
+          :token_url     => 'https://wbsapi.withings.net/v2/oauth2',
       }
 
       option :response_type, 'code'

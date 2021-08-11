@@ -35,7 +35,7 @@ describe "OmniAuth::Strategies::Withings2" do
     end
 
     it 'has correct token url' do
-      expect(subject.options.client_options.token_url).to eq('https://account.withings.com/oauth2/token')
+      expect(subject.options.client_options.token_url).to eq('https://wbsapi.withings.net/v2/oauth2')
     end
   end
 
@@ -53,7 +53,7 @@ describe "OmniAuth::Strategies::Withings2" do
   context 'uid' do
     before :each do
       access_token = double('access_token')
-      allow(access_token).to receive('params') { { 'user_id' => '123ABC' } }
+      allow(access_token).to receive('params') { { 'userid' => '123ABC' } }
       allow(subject).to receive(:access_token) { access_token }
     end
 
