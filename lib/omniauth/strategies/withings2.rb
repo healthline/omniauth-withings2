@@ -16,11 +16,6 @@ module OmniAuth
 
       def build_access_token
         options.token_params.merge!(
-          action: 'requesttoken',
-          grant_type: 'authorization_code',
-          client_id: options[:client_id],
-          client_secret: options[:client_secret],
-          # redirect_uri: 'https://www.withings.com'
           headers: { 'Authorization' => basic_auth_header }
         )
         super
@@ -30,11 +25,11 @@ module OmniAuth
         "Basic " + Base64.strict_encode64("#{options[:client_id]}:#{options[:client_secret]}")
       end
 
-      def query_string
-        # Using state and code params in the callback_url causes a mismatch with
-        # the value set in the withings2 application configuration, so we're skipping them
-        ''
-      end
+      # def query_string
+      #   # Using state and code params in the callback_url causes a mismatch with
+      #   # the value set in the withings2 application configuration, so we're skipping them
+      #   ''
+      # end
 
       uid do
         access_token.params['userid']
