@@ -13,6 +13,7 @@ module OmniAuth
 
       option :response_type, 'code'
       option :authorize_options, %i(scope response_type redirect_uri)
+      option :access_token_params, { action: 'requesttoken' }
 
       def build_access_token
         options.token_params.merge!(
@@ -25,11 +26,11 @@ module OmniAuth
         "Basic " + Base64.strict_encode64("#{options[:client_id]}:#{options[:client_secret]}")
       end
 
-      def query_string
-        # Using state and code params in the callback_url causes a mismatch with
-        # the value set in the withings2 application configuration, so we're skipping them
-        ''
-      end
+      # def query_string
+      #   # Using state and code params in the callback_url causes a mismatch with
+      #   # the value set in the withings2 application configuration, so we're skipping them
+      #   ''
+      # end
 
       uid do
         access_token.params['userid']
