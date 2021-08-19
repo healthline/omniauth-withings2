@@ -6,16 +6,22 @@ module OmniAuth
 
       option :name, 'withings2'
       option :client_options, {
-          :site          => 'https://account.withings.com',
-          :authorize_url => 'https://account.withings.com/oauth2_user/authorize2',
-          :token_url     => 'https://account.withings.com/oauth2/token'
+        :site          => 'https://account.withings.com',
+        :authorize_url => 'https://account.withings.com/oauth2_user/authorize2',
+        :token_url     => 'https://wbsapi.withings.net/v2/oauth2',
+        extract_access_token: proc { |client, hash|
+          ::OAuth2::Client::DEFAULT_EXTRACT_ACCESS_TOKEN.call(client, hash['body'])
+        }
       }
 
       option :response_type, 'code'
       option :authorize_options, %i(scope response_type redirect_uri)
 
       def build_access_token
-        options.token_params.merge!(:headers => {'Authorization' => basic_auth_header })
+        options.token_params.merge!(
+          action: 'requesttoken',
+          headers: { 'Authorization' => basic_auth_header }
+        )
         super
       end
 
