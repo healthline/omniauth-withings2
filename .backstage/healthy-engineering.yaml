@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: omniauth-withings2
+  annotations:
+    github.com/project-slug: healthline/omniauth-withings2
+spec:
+  type: service # can be one of: service, library, website, event-driven-service, terraform-module, terraform-repo
+  lifecycle: production # can be one of: experimental, production, deprecated
+  owner: unassigned # your existing tech team, i.e. team-developer-platforms
